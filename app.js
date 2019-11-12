@@ -16,6 +16,10 @@ app.get('/cars/:id', (req, res) => {
 app.get('/things/:name/:id', function(req, res) {
     res.send('id: ' + req.params.id + ' and name: ' + req.params.name);
  });
+ app.use('/things', function(req, res, next){
+    console.log("A request for things received at " + Date.now());
+    next();
+ });
 app.post('/newcar', (req, res) => {
     if(!req.body.name || req.body.name.length <3 ){
         res.status(400).send('')
