@@ -12,8 +12,14 @@ app.get('/cars/:id', (req, res) => {
     const coolcars = cars.find(c => c.id === parseInt(req.params.id));
     if (!coolcars) res.status(404).send('The car with the given id was not found');
     res.send(coolcars);
-})
+});
+app.get('/things/:name/:id', function(req, res) {
+    res.send('id: ' + req.params.id + ' and name: ' + req.params.name);
+ });
 app.post('/newcar', (req, res) => {
+    if(!req.body.name || req.body.name.length <3 ){
+        res.status(400).send('')
+    }
     const car = {
         id: cars.length + 1,
         name: req.body.name
